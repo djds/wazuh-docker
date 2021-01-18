@@ -1,4 +1,10 @@
 #!/usr/bin/with-contenv sh
 
+set -e
+
+readonly _logfile='/var/ossec/logs/ossec.log'
+
 # dumping ossec.log to standard output
-exec tail -f /var/ossec/logs/ossec.log
+exec tail -f "${_logfile}"
+
+# vim:ft=sh
