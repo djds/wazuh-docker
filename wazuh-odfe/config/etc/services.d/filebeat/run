@@ -1,4 +1,20 @@
 #!/usr/bin/with-contenv sh
+
+set -e
+
 echo >&2 "starting Filebeat"
 
-exec /usr/share/filebeat/bin/filebeat -e -c /etc/filebeat/filebeat.yml -path.home /usr/share/filebeat -path.config /etc/filebeat -path.data /var/lib/filebeat -path.logs /var/log/filebeat
+readonly FILEBEAT='/usr/share/filebeat/bin/filebeat'
+readonly _config='/etc/filebeat'
+readonly _home='/usr/share/filebeat'
+readonly _data='/var/lib/filebeat'
+readonly _logs='/var/log/filebeat'
+
+exec "${FILEBEAT}" -e \
+    -c "${_config}/filebeat.yml" \
+    -path.home "${_home}" \
+    -path.config "${_config}" \
+    -path.data "${_data}" \
+    -path.logs "${_logs}"
+
+# vim:ft=sh
